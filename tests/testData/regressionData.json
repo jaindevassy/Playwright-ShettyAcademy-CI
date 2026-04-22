@@ -1,0 +1,11 @@
+{
+  "product": "Adidas Original",
+  "productId": "6960eae1c941646b7a8b3ed3",
+  "payment": {
+    "creditCardNumber": "4542 9931 9292 2293",
+    "cvv": "214",
+    "nameOnCard": "Joe Root",
+    "country": "Canada"
+  },
+  "expectedEmail": "devassyjain@yahoo.com"
+}

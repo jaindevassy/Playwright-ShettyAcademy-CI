@@ -1,0 +1,36 @@
+{
+  "validUser": {
+    "email": "devassyjain@yahoo.com",
+    "password": "Accord@2020"
+  },
+  "invalidCredentials": [
+    {
+      "scenario": "Invalid email and valid password",
+      "email": "invalid@example.com",
+      "password": "Accord@2020",
+      "expectedError": "Incorrect email or password.",
+      "errorLocator": "toast"
+    },
+    {
+      "scenario": "Valid email and invalid password",
+      "email": "devassyjain@yahoo.com",
+      "password": "WrongPassword@123",
+      "expectedError": "Incorrect email or password.",
+      "errorLocator": "toast"
+    },
+    {
+      "scenario": "Empty email",
+      "email": "",
+      "password": "Accord@2020",
+      "expectedError": "*Email is required",
+      "errorLocator": "field"
+    },
+    {
+      "scenario": "Empty password",
+      "email": "devassyjain@yahoo.com",
+      "password": "",
+      "expectedError": "*Password is required",
+      "errorLocator": "field"
+    }
+  ]
+}
