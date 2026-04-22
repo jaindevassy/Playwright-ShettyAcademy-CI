@@ -29,7 +29,7 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-      testIgnore: /auth\.setup\.ts/,
+      testIgnore: [/auth\.setup\.ts/, /storageState-.*\.spec\.ts/],
     },
     {
       name: 'storageState-tests',
