@@ -27,18 +27,18 @@ export default defineConfig({
       testMatch: /auth\.setup\.ts/,
     },
     {
-      name: 'chromium',
+      name: 'regression-tests',
       use: { ...devices['Desktop Chrome'] },
-      testIgnore: [/auth\.setup\.ts/, /storageState-.*\.spec\.ts/],
+      testIgnore: [/auth\.setup\.ts/, /smokeTest\.spec\.ts/],
     },
     {
-      name: 'storageState-tests',
+      name: 'smoke-tests',
       use: {
         ...devices['Desktop Chrome'],
         storageState: '.auth/user.json',
       },
       dependencies: ['setup'],
-      testMatch: /storageState-.*\.spec\.ts/,
+      testMatch: /smokeTest\.spec\.ts/,
     },
   ],
 });

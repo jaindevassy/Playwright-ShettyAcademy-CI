@@ -7,7 +7,7 @@ export class OrdersPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.orderRows = page.locator('tbody tr');
+    this.orderRows = page.getByRole('row');
     this.orderIdCells = page.locator('tbody tr th');
   }
 
@@ -21,38 +21,39 @@ export class OrdersPage {
 
   async viewOrderById(orderId: string) {
     await this.page
-      .locator('tbody tr')
+      .getByRole('row')
       .filter({ hasText: orderId })
-      .locator('button', { hasText: 'View' })
+      .getByRole('button', { name: 'View' })
       .click();
   }
 
   async isOrderPresent(orderId: string): Promise<boolean> {
     return this.page
-      .locator('tbody tr th', { hasText: orderId })
+      .getByRole('row')
+      .filter({ hasText: orderId })
       .isVisible();
   }
 
   getOrderDetailButton(orderId: string): Locator {
     return this.page
-      .locator('tbody tr')
+      .getByRole('row')
       .filter({ hasText: orderId })
-      .locator('button', { hasText: 'View' });
+      .getByRole('button', { name: 'View' });
   }
 
   async getOrderRowDetails(orderId: string): Promise<{ productName: string; price: string; date: string }> {
-    const row = this.page.locator('tbody tr').filter({ hasText: orderId });
+    const row = this.page.getByRole('row').filter({ hasText: orderId });
     return {
-      productName: await row.locator('td:nth-child(3)').innerText(),
-      price: await row.locator('td:nth-child(4)').innerText(),
-      date: await row.locator('td:nth-child(5)').innerText(),
+      productName: await row.getByRole('cell').nth(2).innerText(),
+      price: await row.getByRole('cell').nth(3).innerText(),
+      date: await row.getByRole('cell').nth(4).innerText(),
     };
   }
 
   getDeleteButton(orderId: string): Locator {
     return this.page
-      .locator('tbody tr')
+      .getByRole('row')
       .filter({ hasText: orderId })
-      .locator('button', { hasText: 'Delete' });
+      .getByRole('button', { name: 'Delete' });
   }
 }
