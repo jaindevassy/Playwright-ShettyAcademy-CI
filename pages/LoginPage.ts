@@ -10,9 +10,9 @@ export class LoginPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.emailInput = page.locator('[placeholder="email@example.com"]');
-    this.passwordInput = page.locator('[placeholder="enter your passsword"]');
-    this.loginButton = page.locator('[value="Login"]');
+    this.emailInput = page.getByPlaceholder('email@example.com');
+    this.passwordInput = page.getByPlaceholder('enter your passsword');
+    this.loginButton = page.getByRole('button', { name: 'Login' });
     this.errorMessage = page.locator('.invalid-feedback');
     this.toastMessage = page.locator('#toast-container');
   }

@@ -1,8 +1,8 @@
 import { test, expect } from '../fixtures/baseTest';
 import regressionData from './testData/regressionData.json';
 
-test.describe('Regression Suite', () => {
-  test('E2E - API order creation + UI order verification @Smoke', async ({
+test.describe('@Regression', () => {
+  test('E2E - API order creation + UI order verification', async ({
     page,
     apiUtils,
     ordersPage,

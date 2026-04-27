@@ -10,17 +10,16 @@ export class CheckoutPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.countryInput = page.locator('[placeholder="Select Country"]');
-    this.placeOrderButton = page.locator('.action__submit');
-    this.cvvInput = page.locator('[placeholder="enter CVV number"]');
-    this.nameOnCardInput = page.locator('[placeholder="enter name on card"]');
+    this.countryInput = page.getByPlaceholder('Select Country');
+    this.placeOrderButton = page.getByText('Place Order');
+    this.cvvInput = page.getByPlaceholder('enter CVV number');
+    this.nameOnCardInput = page.getByPlaceholder('enter name on card');
     this.creditCardInput = page.locator('input:not([placeholder])').first();
   }
 
   async selectCountry(country: string) {
-    await this.countryInput.type(country, { delay: 100 });
-    const countryOption = this.page.locator('.ta-item').filter({ hasText: country }).first();
-    await countryOption.click();
+    await this.countryInput.pressSequentially(country, { delay: 100 });
+    await this.page.getByRole('button', { name: country }).first().click();
   }
 
   async placeOrder() {
@@ -34,7 +33,7 @@ export class CheckoutPage {
   }
 
   getConfirmationMessage(): Locator {
-    return this.page.locator('.hero-primary');
+    return this.page.getByText('Thankyou for the order.');
   }
 
   getOrderId(): Locator {

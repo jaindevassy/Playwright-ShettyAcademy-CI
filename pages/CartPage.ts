@@ -4,13 +4,11 @@ export class CartPage {
   readonly page: Page;
   readonly cartItems: Locator;
   readonly checkoutButton: Locator;
-  readonly deleteButtons: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.cartItems = page.locator('.cartSection h3');
-    this.checkoutButton = page.locator('button.btn.btn-primary', { hasText: 'Checkout' });
-    this.deleteButtons = page.locator('.cart-edit');
+    this.checkoutButton = page.getByRole('button', { name: 'Checkout' });
   }
 
   async getCartItemCount(): Promise<number> {
@@ -18,8 +16,10 @@ export class CartPage {
   }
 
   async isProductInCart(productName: string): Promise<boolean> {
+    await this.cartItems.first().waitFor({ state: 'visible', timeout: 10000 });
     return this.page
-      .locator('.cartSection h3', { hasText: productName })
+      .locator('.cartSection')
+      .filter({ hasText: productName })
       .isVisible();
   }
 
@@ -31,7 +31,7 @@ export class CartPage {
     await this.page
       .locator('.cartSection')
       .filter({ hasText: productName })
-      .locator('.cart-edit')
+      .getByRole('button', { name: 'Delete' })
       .click();
   }
 }
